@@ -1,8 +1,11 @@
 export declare class Task {
     taskId: string;
-    userId: string;
+    createdBy: string;
+    assignedTo: string;
     title: string;
-    status: string;
+    description?: string;
+    status: 'PENDING' | 'IN_PROGRESS' | 'DONE';
     dueDate?: number;
     createdAt: number;
+    updatedAt?: number;
 }

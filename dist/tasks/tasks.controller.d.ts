@@ -1,17 +1,23 @@
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 export declare class TasksController {
     private readonly tasksService;
     constructor(tasksService: TasksService);
+    searchByUser(userId: string): Promise<Record<string, any>[]>;
+    findAll(): Promise<Record<string, any>[]>;
     create(dto: CreateTaskDto): Promise<{
         taskId: `${string}-${string}-${string}-${string}-${string}`;
         title: string;
         description: string;
         dueDate: number;
-        creator: string;
-        assignee: string;
+        createdBy: string;
+        assignedTo: string;
         status: string;
         createdAt: number;
     }>;
-    findAll(): Promise<Record<string, any>[]>;
+    update(taskId: string, dto: UpdateTaskDto): Promise<Record<string, any>>;
+    remove(taskId: string): Promise<{
+        message: string;
+    }>;
 }

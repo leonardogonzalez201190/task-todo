@@ -1,8 +1,13 @@
+export declare enum TaskStatus {
+    PENDING = "PENDING",
+    IN_PROGRESS = "IN_PROGRESS",
+    DONE = "DONE"
+}
 export declare class CreateTaskDto {
     title: string;
-    description: string;
+    createdBy: string;
+    description?: string;
     dueDate?: number;
-    creator: string;
-    assignee: string;
-    status: string;
+    assignedTo?: string;
+    status?: TaskStatus;
 }
