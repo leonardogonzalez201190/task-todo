@@ -10,11 +10,13 @@ exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
+const dynamodb_module_1 = require("../dynamodb/dynamodb.module");
 let UsersModule = class UsersModule {
 };
 exports.UsersModule = UsersModule;
 exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
+        imports: [dynamodb_module_1.DynamodbModule],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService],
     })

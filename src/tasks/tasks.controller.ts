@@ -21,12 +21,12 @@ export class TasksController {
 
   @Get('search')
   @ApiOperation({
-    summary: 'Listar tareas creadas o asignadas a un usuario',
+    summary: 'List tasks created or assigned to a user',
   })
   @ApiQuery({
     name: 'userId',
     required: true,
-    description: 'ID del usuario',
+    description: 'User ID',
   })
   searchByUser(@Query('userId') userId: string) {
     return this.tasksService.findByUser(userId);
@@ -34,22 +34,22 @@ export class TasksController {
 
   // GET /tasks
   @Get()
-  @ApiOperation({ summary: 'Listar todas las tareas' })
+  @ApiOperation({ summary: 'List all tasks' })
   findAll() {
     return this.tasksService.findAll();
   }
 
   // POST /tasks
   @Post()
-  @ApiOperation({ summary: 'Crear una nueva tarea' })
+  @ApiOperation({ summary: 'Create a new task' })
   create(@Body() dto: CreateTaskDto) {
     return this.tasksService.create(dto);
   }
 
   // PUT /tasks/:id
   @Put(':id')
-  @ApiOperation({ summary: 'Actualizar una tarea parcialmente' })
-  @ApiParam({ name: 'id', description: 'ID de la tarea' })
+  @ApiOperation({ summary: 'Update a task partially' })
+  @ApiParam({ name: 'id', description: 'Task ID' })
   update(
     @Param('id') taskId: string,
     @Body() dto: UpdateTaskDto,
@@ -59,8 +59,8 @@ export class TasksController {
 
   // DELETE /tasks/:id
   @Delete(':id')
-  @ApiOperation({ summary: 'Eliminar una tarea' })
-  @ApiParam({ name: 'id', description: 'ID de la tarea' })
+  @ApiOperation({ summary: 'Delete a task' })
+  @ApiParam({ name: 'id', description: 'Task ID' })
   remove(@Param('id') taskId: string) {
     return this.tasksService.remove(taskId);
   }
