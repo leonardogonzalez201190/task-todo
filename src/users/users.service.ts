@@ -1,23 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamodbService } from '../dynamodb/dynamodb.service';
 import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  private readonly client = new DynamoDBClient({
-    region: process.env.AWS_REGION || 'us-east-1',
-  });
-
   private readonly tableName = 'Users';
 
+  constructor(
+    private readonly dynamodbService: DynamodbService,
+  ) { }
+
   async findAll(): Promise<User[]> {
-    const result = await this.client.send(
+    const client = this.dynamodbService.getClient();
+
+    const result = await client.send(
       new ScanCommand({
         TableName: this.tableName,
       }),
     );
 
-    return (result.Items || []) as User[];
+    return (result.Items ?? []) as User[];
   }
 }
